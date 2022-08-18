@@ -42,7 +42,15 @@
 
 <button></button>
 <script>
+  const divs = document.querySelectorAll('div');
 
+  function logText(e){
+    console.log(this.classList.value);
+    e.stopPropagation(); //stops event from bubbling up the capture tree (or if capture is true, from triggering on the way down the capture tree beyond the first level)
+  }
+
+  divs.forEach(div => div.addEventListener('click', logText, {capture: true, once: true})); //capture true makes the logText event trigger as the capture tree cascades down rather than waiting for the bubble to propogate up like it would if capture true wasn't provided
+  //once true stops the event listener from being activated again
 </script>
 </body>
 </html>
